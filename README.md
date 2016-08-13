@@ -5,7 +5,9 @@ These days there is a information explosion and thus we need to organise the inf
 The aim of this project is to help users to catch their notes on a webpage and help them to organise that into the required structure
 
 
-*GOALS*
-1.a user-interface on the webpage
-2.Selection of TEXT and IMAGES
-3.Ability to edit and modify the information
+<BOLD>GOALS</BOLD>
+<ul>
+<li>a user-interface on the webpage</li>
+<li>2.Selection of TEXT and IMAGES</li>
+<li>3.Ability to edit and modify the information</li>
+</ul>
