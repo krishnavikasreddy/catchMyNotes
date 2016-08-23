@@ -2,6 +2,9 @@
   Author:krishna vikas
   License:MIT
   email:krishna.vikasreddy@gmail.com
+
+  NO WARRANTY WHATSO EVER SO DONT BLAME ME.
+  FREE AS SUCH IN 'FREEDOM' NOT IN 'FREE PIZZA'!
 */
 
 /*
@@ -9,64 +12,217 @@
 */
 
 //asking the page to load our object as it is clicked on
-(function(obj){
-    // this is where the script begins
-    // like the constructor
-    if(!window.jQuery)
-    {
-	var script = document.createElement('script');
-	script.type = "text/javascript";
-	script.src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js";	document.getElementsByTagName('head')[0].appendChild(script);
-    }
-    addEvents();
-    
-})();
+
+
+var JQUERY_URL="jquery.min.js";
+var BOOTSTRAP_CSS_URL="bootstrap.css";
+var JQUERYUI_JS_URL="jquery-ui-1.12.0/jquery-ui.min.js";
+var JQUERYUI_CSS_URL="jquery-ui-1.12.0/jquery-ui.min.css";
+
+
+//Varibles
+var notesClassTag="notes-";
+var greenClassTag="green-text"
+
 
 //Notes is the Object we store all our selected data
 //As we go on we might increase the requirements of the Notes object
-var Notes={
+var notesId=0;
+var Notes=[];
+
+var NotesObject=function(id,text){
+    this.text=text;
+    this.id=id;
     
 }
 
-
+NotesObject.prototype={
+    getElem:function(){
+	return document.getElementsByClassName(notesClassTag+this.id);
+    },
+    
+}
+var test;
 function addEvents(){
     var body=document.getElementsByTagName("body")[0];
     body.onmouseup=function(){
 	var sel=window.getSelection();
-
-	//TODO: change the green-text and add a generic class
-	var spanElemStart =document.createElement("span");
-	spanElemStart.setAttribute("class","green-text");
-
-	var spanElemEnd =document.createElement("span");
-	spanElemEnd.setAttribute("class","green-text");
-
-	// check if the current selection is in the same node
-	if(sel.anchorNode === sel.focusNode)
+	var selText=sel.toString();
+	//Length can varied according to Need
+	if(sel.toString().length>2)
 	{
-	    var range=sel.getRangeAt(0);
-	    range.surroundContents(spanElemStart);
-	}
+	    //
+	    notesId++;
+	    
+	    var sib=sel.anchorNode;
+	    var childNodes=[sel.anchorNode];
 
-	//if not split it and add the styles accordingly
-	else
-	{
-	    // anchorNode
-	    var rangeA=document.createRange();
-	    rangeA.setStart(sel.anchorNode,sel.anchorOffset);
-	    rangeA.setEnd(sel.anchorNode,sel.anchorNode.length);
-	    rangeA.surroundContents(spanElemStart);
+	    while(!(sib == sel.focusNode))
+	    {
+		if(sib.nextSibling!=null)
+		{
+		    sib=sib.nextSibling;
+		}
+		else
+		{
+		    sib=sib.parentElement.nextSibling;
+		}
+		
+		var chid=getAllTextNodes(sib);
 
-	    //focusNode
-	    var rangeF=document.createRange();
-	    rangeF.setStart(sel.focusNode,0);
-	    rangeF.setEnd(sel.focusNode,sel.focusOffset);
-	    rangeF.surroundContents(spanElemEnd);
-	}
+		childNodes=childNodes.concat(chid);
 
-	window.getSelection().empty();
-	
-    }    
+		var toBreak=false;
+
+		// check if any child nodes is the focus node
+		for(var i in chid)
+		{
+		    if(chid[i]==sel.focusNode)
+		    {
+			toBreak=true;
+		    }
+		}
+
+		
+		if(toBreak){
+		    break;
+		}
+		
+	    }
+	    
+	    //childNodes
+	    
+	    for(var index in childNodes)
+	    {
+		var value=childNodes[index];
+		var rangeS=document.createRange();
+		rangeS.selectNode(value);
+		if(value===sel.anchorNode && value===sel.focusNode){
+		    rangeS.setStart(value,sel.anchorOffset);
+		    rangeS.setEnd(value,sel.focusOffset);
+		}
+		else if(value===sel.anchorNode){
+		    rangeS.setStart(value,sel.anchorOffset);
+		    rangeS.setEnd(value,value.length);
+		}
+		else if(value===sel.focusNode){
+		    rangeS.setStart(value,0);
+		    rangeS.setEnd(value,sel.focusOffset);
+		}
+		var spanElem=document.createElement("span");
+		spanElem.setAttribute("class",greenClassTag+" "+notesClassTag+notesId); 
+		rangeS.surroundContents(spanElem);
+		
+	    }
+	    
+	    
+	    //Add the selection to Notes
+	    var newNote=new NotesObject(notesId,selText);
+	    Notes.push(newNote);
+	    
+	    //unselect the selection so that it does not cause back to back selection 
+	    window.getSelection().empty();
+	    
+	}    }
 }
+
+var getAllTextNodes=function(elem,nodes=[]){
+    //console.log(elem);
+    if(elem!=null)
+    {
+	if(elem.nodeType==3)
+	{
+	    nodes.push(elem);
+	}
+	else if(elem.nodeType==1){
+	    for(var i in elem.childNodes)
+	    {
+		getAllTextNodes(elem.childNodes[i],nodes);
+	    }
+	}
+    }
+
+    return nodes;
+}
+
+
+var DB={
+    showMenu:function(){
+	var menu=$("<div>"+DB.prop.menu.contents+"</div>");
+	$(menu).addClass(DB.prop.menu.className);
+	$("html").append(menu);
+	$(menu).click(function(){
+	    DB.showContainer();
+	    $(".notes-view").dialog({
+		css:{overflow:"visible"},
+		resizable: false,
+		height: "auto",
+		width:"auto",
+		modal: true,
+		buttons: {
+		    "Delete all items": function() {
+			$( this ).dialog( "close" );
+		    },
+		    Cancel: function() {
+			$( this ).dialog( "close" );
+		    }
+		}
+	    });
+	});
+    },
+    showContainer:function(){
+	var container=$(".notes-view");
+	$(container).html("");
+	$.each(Notes,(index,note)=>{
+	    $(container).append("<div class='row notes-item'><div class='col-xs-12'>"+note.text+"</div></div>");
+	})
+	   
+    }
+};
+
+DB.prop={
+    menu:{
+	container:"div",
+	display:true,
+	contents:"Notes",
+	className:"btn btn-primary notes-btn"
+    },
+    contents:function(){
+	
+    }
+};
+
+
+(function(obj){
+    // this is where the script begins
+    // like the constructor
+
+   
+
+    if(!window.jQuery)
+    {
+	var script = document.createElement('script');
+	script.type = "text/javascript";
+	script.src = JQUERY_URL;
+
+	script.onload=function(){
+	    $("head").append("<link rel='stylesheet' type='text/css' href='"+BOOTSTRAP_CSS_URL+"' />");
+	    $("head").append("<link rel='stylesheet' type='text/css' href='"+JQUERYUI_CSS_URL+"' />");
+	    //DB.showMenu();
+	};
+
+
+	document.getElementsByTagName('head')[0].appendChild(script);
+    }
+    else{
+	
+    $("head").append("<link rel='stylesheet' type='text/css' href='"+BOOTSTRAP_CSS_URL+"' />");
+    DB.showMenu();
+    addEvents();
+    }
+    
+})();
+
+
 
 

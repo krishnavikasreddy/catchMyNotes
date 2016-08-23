@@ -1,6 +1,11 @@
 <html>
   <head>
-    
+    <style>
+      .green-text{
+      background-color:green;
+      color:#fff;
+      }
+    </style>
     </head>
   <body>
     <div>
@@ -16,7 +21,7 @@
       
       <div>
 	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-	<p>tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco aboris nisi ut
+	<p>tempor <span>incididunt</span> ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco aboris nisi ut
 	  
 	</p>
 	<span>

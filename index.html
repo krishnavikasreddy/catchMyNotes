@@ -5,7 +5,35 @@
       background-color:green;
       color:#fff;
       }
+
+      .notes-view{
+      display:none;
+      }
+      .heading{
+      display: block;
+      background: darkorange!important;
+      color: white;
+      padding:5px;
+      margin:1px;
+      }
+      
+      .notes-item{
+      padding:3px;
+      border-bottom:1px solid orange;
+      }
+      .notes-btn{
+      float:right;
+      margin-right:10px;
+      position:absolute;
+      top:10px;
+      right:5px;
+      }
     </style>
+    <link rel='stylesheet' type='text/css' href="jquery-ui-1.12.0/jquery-ui.min.css" />
+    <script type="text/javascript" src="jquery.min.js">
+    </script>
+    <script type="text/javascript" src="jquery-ui-1.12.0/jquery-ui.min.js">
+    </script>
     </head>
   <body>
     <div>
@@ -30,5 +58,21 @@
 	in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </div>
     </div>
+    <div class="container-fluid notes-view" title="Catch My Notes">
+      <div class="row">
+      </div>
+      <div class="row notes-item">
+	<div class="col-xs-12">
+	  This is the First
+	  </div>
+      </div>
+      <div class="row notes-item">
+	<div class="col-xs-12">
+	  This is the Second
+	  </div>
+      </div>
+	
+    </div>
+    
   </body>
 </html>
