@@ -30,10 +30,10 @@ var greenClassTag="green-text"
 var notesId=0;
 var Notes=[];
 
-var NotesObject=function(id,text){
+var NotesObject=function(id,text,ranges){
     this.text=text;
     this.id=id;
-    
+    this.ranges=ranges;
 }
 
 NotesObject.prototype={
@@ -42,7 +42,8 @@ NotesObject.prototype={
     },
     
 }
-var test;
+
+
 function addEvents(){
     var body=document.getElementsByTagName("body")[0];
     body.onmouseup=function(){
@@ -89,7 +90,8 @@ function addEvents(){
 		}
 		
 	    }
-	    
+
+	    var childRanges=[];
 	    //childNodes
 	    
 	    for(var index in childNodes)
@@ -109,25 +111,26 @@ function addEvents(){
 		    rangeS.setStart(value,0);
 		    rangeS.setEnd(value,sel.focusOffset);
 		}
-		var spanElem=document.createElement("span");
-		spanElem.setAttribute("class",greenClassTag+" "+notesClassTag+notesId); 
-		rangeS.surroundContents(spanElem);
-		
+		childRanges.push(rangeS);
 	    }
 	    
 	    
 	    //Add the selection to Notes
-	    var newNote=new NotesObject(notesId,selText);
+	    var newNote=new NotesObject(notesId,selText,childRanges);
 	    Notes.push(newNote);
 	    
 	    //unselect the selection so that it does not cause back to back selection 
 	    window.getSelection().empty();
+	    ColorRanges();
 	    
 	}    }
 }
 
+
+//This has to go to utilities function
+
 var getAllTextNodes=function(elem,nodes=[]){
-    //console.log(elem);
+    
     if(elem!=null)
     {
 	if(elem.nodeType==3)
@@ -144,7 +147,44 @@ var getAllTextNodes=function(elem,nodes=[]){
 
     return nodes;
 }
+var ColorRanges=function(){
+    for(var note of Notes){
+	var notesId=note.id;
+	for(var range of note.ranges)
+	{
+	    var toSurrond=function(){
+		var node=range.cloneContents().childNodes[0];
+		if(!node.className)
+		{
+		    return false;
+		}
+		else if(node.className.indexOf("green-text")!=-1)
+		{
+		    return true;
+		}
+		return false;	
+	    }
+	    
+	    if(!toSurrond())
+	    {
+		var spanElem=document.createElement("span");
+		spanElem.setAttribute("class",greenClassTag+" "+notesClassTag+notesId);
+		//add event to the span to delete it
+		range.surroundContents(spanElem);
+	    }
+	}
+    }
+}
 
+
+var unColorRanges=function(notesId){
+    for(var i in notesId)
+    {
+	$(".notes-"+notesId[i]).contents().unwrap();
+    }
+}
+
+//TODO: DB Name has to be changed
 
 var DB={
     showMenu:function(){
@@ -160,8 +200,8 @@ var DB={
 		width:"auto",
 		modal: true,
 		buttons: {
-		    "Delete all items": function() {
-			$( this ).dialog( "close" );
+		    "Delete all": function() {
+			DB.deleteContainerContents();
 		    },
 		    Cancel: function() {
 			$( this ).dialog( "close" );
@@ -170,15 +210,23 @@ var DB={
 	    });
 	});
     },
+
     showContainer:function(){
 	var container=$(".notes-view");
 	$(container).html("");
 	$.each(Notes,(index,note)=>{
 	    $(container).append("<div class='row notes-item'><div class='col-xs-12'>"+note.text+"</div></div>");
 	})
-	   
+	    
+	    },
+
+    deleteContainerContents:function(){
+	$(".notes-view").html("");
+	Notes=[];
     }
 };
+
+
 
 DB.prop={
     menu:{
@@ -193,11 +241,14 @@ DB.prop={
 };
 
 
+
+
+
 (function(obj){
     // this is where the script begins
     // like the constructor
 
-   
+    
 
     if(!window.jQuery)
     {
@@ -216,9 +267,9 @@ DB.prop={
     }
     else{
 	
-    $("head").append("<link rel='stylesheet' type='text/css' href='"+BOOTSTRAP_CSS_URL+"' />");
-    DB.showMenu();
-    addEvents();
+	$("head").append("<link rel='stylesheet' type='text/css' href='"+BOOTSTRAP_CSS_URL+"' />");
+	DB.showMenu();
+	addEvents();
     }
     
 })();
