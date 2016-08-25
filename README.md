@@ -7,12 +7,12 @@ The aim of this project is to help users to catch their notes on a webpage and h
 
 
 ## GOALS
-1.Work on any webpage without affecting its contents
-2.Selection of TEXT and IMAGES
-3.Ability to edit and modify the information
-4.Export the selected Information
+1. Work on any webpage without affecting its contents
+2. Selection of TEXT and IMAGES
+3. Ability to edit and modify the information
+4. Export the selected Information
 
 ## How to Install
-1.Copy the Bookmarklet
-2.Fire the Bookmarklet on a web page
-3.Have fun 
+1. Copy the Bookmarklet
+2. Fire the Bookmarklet on a web page
+3. Have fun 
