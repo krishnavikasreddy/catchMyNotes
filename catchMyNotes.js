@@ -29,7 +29,11 @@ var greenClassTag="green-text"
 //As we go on we might increase the requirements of the Notes object
 var notesId=0;
 var Notes=[];
-
+Notes.getAllId=function(){
+   return  this.map(function(elem){
+	return elem.id;
+    });
+}
 var NotesObject=function(id,text,ranges){
     this.text=text;
     this.id=id;
@@ -158,7 +162,7 @@ var ColorRanges=function(){
 		{
 		    return false;
 		}
-		else if(node.className.indexOf("green-text")!=-1)
+		else if(node.className.indexOf(greenClassTag)!=-1)
 		{
 		    return true;
 		}
@@ -169,6 +173,28 @@ var ColorRanges=function(){
 	    {
 		var spanElem=document.createElement("span");
 		spanElem.setAttribute("class",greenClassTag+" "+notesClassTag+notesId);
+		spanElem.setAttribute("title","Hello world");
+
+		$(spanElem).tooltip({
+		    position:{ my: "top-2%", at: "bottom"},
+		    track:false,
+		    close: function(event, ui)
+		    {
+			//hover tip to stay active
+			ui.tooltip.hover(function()
+					 {
+					     $(this).stop(true).fadeTo(400, 1); 
+					 },
+					 function()
+					 {
+					     $(this).fadeOut('400', function()
+							     {
+								 $(this).remove();
+							     });
+					 });
+		    }
+		
+		});
 		//add event to the span to delete it
 		range.surroundContents(spanElem);
 	    }
