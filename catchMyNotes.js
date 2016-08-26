@@ -15,7 +15,7 @@
 
 
 var JQUERY_URL="jquery.min.js";
-var BOOTSTRAP_CSS_URL="bootstrap.css";
+var BOOTSTRAP_CSS_URL="bootstrap/css/bootstrap.css";
 var JQUERYUI_JS_URL="jquery-ui-1.12.0/jquery-ui.min.js";
 var JQUERYUI_CSS_URL="jquery-ui-1.12.0/jquery-ui.min.css";
 
@@ -33,6 +33,15 @@ Notes.getAllId=function(){
    return  this.map(function(elem){
 	return elem.id;
     });
+}
+
+Notes.removeItem=function(id){
+   this.find(function(elem,index,arr){
+	if(elem.id==id)
+       {
+	    arr.splice(index,1);
+	}
+    })
 }
 var NotesObject=function(id,text,ranges){
     this.text=text;
@@ -203,7 +212,11 @@ var ColorRanges=function(){
 }
 
 
-var unColorRanges=function(notesId){
+var UnColorRanges=function(notesId){
+    if(!(notesId instanceof Array))
+    {
+	notesId=[notesId];
+    }
     for(var i in notesId)
     {
 	$(".notes-"+notesId[i]).contents().unwrap();
@@ -224,6 +237,7 @@ var DB={
 		resizable: false,
 		height: "auto",
 		width:"auto",
+		"max-width":"800px",
 		modal: true,
 		buttons: {
 		    "Delete all": function() {
@@ -241,14 +255,21 @@ var DB={
 	var container=$(".notes-view");
 	$(container).html("");
 	$.each(Notes,(index,note)=>{
-	    $(container).append("<div class='row notes-item'><div class='col-xs-12'>"+note.text+"</div></div>");
+	    $(container).append("<div class='row notes-item notes-view-item-id-"+note.id+"'><div class='col-xs-12'><a onclick='DB.deleteItem("+note.id+")' href='#' class='glyphicon glyphicon-remove notes-remove' ></a>"+note.text+"</div></div>");
 	})
 	    
 	    },
 
     deleteContainerContents:function(){
 	$(".notes-view").html("");
+	UnColorRanges(Notes.getAllId());
 	Notes=[];
+    },
+    
+    deleteItem:function(id){
+	UnColorRanges(id);
+	Notes.removeItem(id);
+	$(".notes-view-item-id-"+id).remove();
     }
 };
 

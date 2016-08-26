@@ -2,39 +2,28 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Wed Aug 24 20:39:45 2016
+;; Created Fri Aug 26 16:25:15 2016
 ;; Desktop file format version 206
 ;; Emacs version 24.5.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (22462 15953 167874 626000) (desktop . "206") "vikas@vikas-Aspire-E1-571" nil nil ((((font-backend xft x) (font . "-DAMA-Ubuntu Mono-normal-normal-normal-*-17-*-*-*-m-0-iso10646-1") (font-parameter . "Ubuntu Mono 13") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (foreground-color . "#eeeeec") (background-color . "#2e3436") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 9) (right-fringe . 9) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 1) (tool-bar-lines . 0) (title) (wait-for-wm . t) (fullscreen . maximized) (tool-bar-position . top) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 10) (alpha) (horizontal-scroll-bars . t) (display-type . color) (background-mode . dark) (cursor-color . "#fce94f") (sticky) (environment) (frameset--id . "E220-4DFA-60A3-283D") (frameset--mini t . t) (modeline . t) (minibuffer . t) (unsplittable) (icon-name) (display . ":0") (explicit-name) (visibility . t) (height . 40) (width . 141) (left . 65) (top . 24)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 6) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 72) (min-pixel-width . 90) (min-pixel-height-ignore . 36) (min-pixel-width-ignore . 54) (min-pixel-height-safe . 18) (min-pixel-width-safe . 18)) leaf (pixel-width . 1301) (pixel-height . 703) (total-width . 145) (total-height . 39) (normal-height . 1.0) (normal-width . 1.0) (buffer "README.MD" (selected . t) (hscroll . 0) (fringes 9 9 nil) (margins nil) (scroll-bars 10 2 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1))))])
+(setq desktop-saved-frameset [frameset 1 (22464 42411 37465 462000) (desktop . "206") "vikas@vikas-Aspire-E1-571" nil nil ((((font-backend xft x) (font . "-DAMA-Ubuntu Mono-normal-normal-normal-*-17-*-*-*-m-0-iso10646-1") (font-parameter . "Ubuntu Mono 13") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (foreground-color . "#eeeeec") (background-color . "#2e3436") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 9) (right-fringe . 9) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 1) (tool-bar-lines . 0) (title) (wait-for-wm . t) (fullscreen . maximized) (tool-bar-position . top) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 10) (alpha) (horizontal-scroll-bars . t) (display-type . color) (background-mode . dark) (cursor-color . "#fce94f") (sticky) (environment) (frameset--id . "E220-4DFA-60A3-283D") (frameset--mini t . t) (modeline . t) (minibuffer . t) (unsplittable) (icon-name) (display . ":0") (explicit-name) (visibility . t) (height . 40) (width . 141) (left . 65) (top . 24)) ((min-height . 4) (min-width . 20) (min-height-ignore . 2) (min-width-ignore . 12) (min-height-safe . 1) (min-width-safe . 4) (min-pixel-height . 72) (min-pixel-width . 180) (min-pixel-height-ignore . 36) (min-pixel-width-ignore . 108) (min-pixel-height-safe . 18) (min-pixel-width-safe . 36)) hc (pixel-width . 1301) (pixel-height . 703) (total-width . 145) (total-height . 39) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 653) (pixel-height . 703) (total-width . 73) (total-height . 39) (normal-height . 1.0) (normal-width . 0.5) (buffer "catchMyNotes.js" (selected . t) (hscroll . 0) (fringes 9 9 nil) (margins 3) (scroll-bars 10 2 t nil) (vscroll . 0) (dedicated) (point . 5048) (start . 4663))) (leaf (last . t) (pixel-width . 648) (pixel-height . 703) (total-width . 72) (total-height . 39) (normal-height . 1.0) (normal-width . 0.5) (buffer "index.html" (selected) (hscroll . 0) (fringes 9 9 nil) (margins 2) (scroll-bars 10 2 t nil) (vscroll . 0) (dedicated) (point . 2056) (start . 905)))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring '("sib" "test" " " "this"))
+(setq search-ring '("u" "sib" "test" " " "this"))
 (setq regexp-search-ring nil)
 (setq register-alist nil)
-(setq file-name-history '("~/Documents/projects/js/catchMyNotes/README.MD" "~/Documents/projects/js/catchMyNotes/README.md" "~/Documents/notes/Deep/" "~/Documents/projects/c/basicc/" "~/Documents/notes/markets/" "~/Documents/projects/js/an/" "~/Documents/projects/c/basicc/" "~/Documents/projects/js/catchMyNotes/honey.org" "~/" "~/Documents/notes/markets/" "~/Documents/projects/c/basicc/" "~/Documents/projects/js/callbacks.js" "~/Documents/projects/c/basicc/" "~/Documents/projects/js/an/" "~/.emacs" "~/Documents/projects/js/catchMyNotes/index.html" "~/Documents/projects/js/catchMyNotes/catchMyNotes.js" "~/Documents/projects/js/catchMyNotes/README.md" "~/Documents/projects/js/catchMyNotes/" "~/Documents/projects/js/an/app/app.routes.ts" "~/Documents/projects/js/an/app/" "~/Documents/projects/js/an/app/hero.ts" "~/" "~/Documents/projects/js/an/app/" "~/Documents/projects/js/an/app/main.ts" "~/Documents/projects/js/an/" "~/Documents/projects/js/an/app/main.ts" "~/.emacs" "~/README.md" "~/.emacs" "~/i.html" "~/.emacs" "~/i.html" "~/.emacs" "~/" "~/i.html" "~/.emacs"))
+(setq file-name-history '("~/Documents/projects/js/catchMyNotes/todo.org" "~/Documents/projects/js/catchMyNotes/README.MD" "~/Documents/projects/js/catchMyNotes/README.md" "~/Documents/notes/Deep/" "~/Documents/projects/c/basicc/" "~/Documents/notes/markets/" "~/Documents/projects/js/an/" "~/Documents/projects/c/basicc/" "~/Documents/projects/js/catchMyNotes/honey.org" "~/" "~/Documents/notes/markets/" "~/Documents/projects/c/basicc/" "~/Documents/projects/js/callbacks.js" "~/Documents/projects/c/basicc/" "~/Documents/projects/js/an/" "~/.emacs" "~/Documents/projects/js/catchMyNotes/index.html" "~/Documents/projects/js/catchMyNotes/catchMyNotes.js" "~/Documents/projects/js/catchMyNotes/README.md" "~/Documents/projects/js/catchMyNotes/" "~/Documents/projects/js/an/app/app.routes.ts" "~/Documents/projects/js/an/app/" "~/Documents/projects/js/an/app/hero.ts" "~/" "~/Documents/projects/js/an/app/" "~/Documents/projects/js/an/app/main.ts" "~/Documents/projects/js/an/" "~/Documents/projects/js/an/app/main.ts" "~/.emacs" "~/README.md" "~/.emacs" "~/i.html" "~/.emacs" "~/i.html" "~/.emacs" "~/" "~/i.html" "~/.emacs"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
-(desktop-create-buffer 206
-  "/home/vikas/Documents/projects/js/catchMyNotes/README.MD"
-  "README.MD"
-  'fundamental-mode
-  '(visual-line-mode linum-mode global-auto-revert-mode company-mode)
-  1
-  '(nil nil)
-  nil
-  nil
-  '((truncate-lines)))
-
 (desktop-create-buffer 206
   "/home/vikas/Documents/projects/js/catchMyNotes/catchMyNotes.js"
   "catchMyNotes.js"
   'js-mode
   '(visual-line-mode linum-mode global-auto-revert-mode company-mode hs-minor-mode)
-  2783
-  '(3676 nil)
+  5048
+  '(5057 nil)
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix) (truncate-lines)))
@@ -44,11 +33,33 @@
   "index.html"
   'html-mode
   '(visual-line-mode linum-mode hl-tags-mode global-auto-revert-mode company-mode)
-  422
-  '(2051 nil)
+  2056
+  '(2073 nil)
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/home/vikas/Documents/projects/js/catchMyNotes/todo.org"
+  "todo.org"
+  'org-mode
+  '(visual-line-mode linum-mode global-auto-revert-mode company-mode)
+  25
+  '(25 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (truncate-lines)))
+
+(desktop-create-buffer 206
+  "/home/vikas/Documents/projects/js/catchMyNotes/README.MD"
+  "README.MD"
+  'fundamental-mode
+  '(visual-line-mode linum-mode global-auto-revert-mode company-mode)
+  527
+  '(1 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (truncate-lines)))
 
 (desktop-create-buffer 206
   "/home/vikas/Documents/projects/js/callbacks.js"
