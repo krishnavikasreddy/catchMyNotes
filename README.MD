@@ -15,4 +15,14 @@ The aim of this project is to help users to catch their notes on a webpage and h
 ## How to Install
 1. Copy the Bookmarklet
 2. Fire the Bookmarklet on a web page
-3. Have fun 
+3. Have fun
+
+
+## Features
+1) Selection of Text
+2) UI Interface
+
+## TODO
+- Editing the selected Text
+- Coloring Text
+- adding delimiters at the beginning

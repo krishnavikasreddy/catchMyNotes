@@ -30,18 +30,15 @@ var greenClassTag="green-text"
 var notesId=0;
 var Notes=[];
 Notes.getAllId=function(){
-   return  this.map(function(elem){
+    return  this.map(function(elem){
 	return elem.id;
     });
 }
 
 Notes.removeItem=function(id){
-   this.find(function(elem,index,arr){
-	if(elem.id==id)
-       {
-	    arr.splice(index,1);
-	}
-    })
+    this.splice(this.findIndex(function(elem){
+	return elem.id==id;
+    }),1);
 }
 var NotesObject=function(id,text,ranges){
     this.text=text;
@@ -202,7 +199,7 @@ var ColorRanges=function(){
 							     });
 					 });
 		    }
-		
+		    
 		});
 		//add event to the span to delete it
 		range.surroundContents(spanElem);
@@ -234,17 +231,26 @@ var DB={
 	    DB.showContainer();
 	    $(".notes-view").dialog({
 		css:{overflow:"visible"},
-		resizable: false,
-		height: "auto",
-		width:"auto",
-		"max-width":"800px",
+		resizable: true,
+		width:"600px",
 		modal: true,
 		buttons: {
 		    "Delete all": function() {
 			DB.deleteContainerContents();
 		    },
-		    Cancel: function() {
-			$( this ).dialog( "close" );
+		    Copy: function(e) {
+			var selection=window.getSelection();
+			selection.removeAllRanges();
+			var range=document.createRange();
+			range.selectNode($(".notes-view")[0]);
+			selection.addRange(range);
+			try{
+			    document.execCommand("copy");
+			}
+			catch(e){
+			    console.log(e);
+			}
+			selection.empty();
 		    }
 		}
 	    });
@@ -255,7 +261,7 @@ var DB={
 	var container=$(".notes-view");
 	$(container).html("");
 	$.each(Notes,(index,note)=>{
-	    $(container).append("<div class='row notes-item notes-view-item-id-"+note.id+"'><div class='col-xs-12'><a onclick='DB.deleteItem("+note.id+")' href='#' class='glyphicon glyphicon-remove notes-remove' ></a>"+note.text+"</div></div>");
+	    $(container).append("<div class='row notes-item notes-view-item-id-"+note.id+"'><div class='col-xs-12'><a onclick='DB.deleteItem("+note.id+")' href='#' class='glyphicon glyphicon-remove notes-remove' ></a><div class='notes-text' onclick='editTextContent()'>"+note.text+"</div></div></div>");
 	})
 	    
 	    },
@@ -269,6 +275,7 @@ var DB={
     deleteItem:function(id){
 	UnColorRanges(id);
 	Notes.removeItem(id);
+	console.log(id);
 	$(".notes-view-item-id-"+id).remove();
     }
 };
