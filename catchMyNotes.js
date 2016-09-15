@@ -4,6 +4,7 @@
   email:krishna.vikasreddy@gmail.com
 
   NO WARRANTY WHATSO EVER SO DONT BLAME ME.
+
   FREE AS SUCH IN 'FREEDOM' NOT IN 'FREE PIZZA'!
 */
 
@@ -40,10 +41,40 @@ Notes.removeItem=function(id){
 	return elem.id==id;
     }),1);
 }
-var NotesObject=function(id,text,ranges){
+
+Notes.sortItems = function(a,b){
+    if(a.top < b.top)
+    {
+	return -1;
+    }
+    else if(a.top > b.top)
+    {
+	return 1;
+    }
+    else if(a.top == b.top){
+	
+	if(a.left < b.left){
+	    return -1;
+	}
+	else if(a.left > b.left)
+	{
+	    return 1;
+	}
+	else
+	{
+	    return 0;
+	}
+    }
+}
+
+
+
+var NotesObject=function(id,text,ranges,top,left){
     this.text=text;
     this.id=id;
     this.ranges=ranges;
+    this.top=top;
+    this.left=left;
 }
 
 NotesObject.prototype={
@@ -58,7 +89,11 @@ function addEvents(){
     var body=document.getElementsByTagName("body")[0];
     body.onmouseup=function(){
 	var sel=window.getSelection();
+	var rangeParent=sel.getRangeAt(0);
+	var boundingRect=rangeParent.getBoundingClientRect();
+	
 	var selText=sel.toString();
+	
 	//Length can varied according to Need
 	if(sel.toString().length>2)
 	{
@@ -68,7 +103,7 @@ function addEvents(){
 	    var sib=sel.anchorNode;
 	    var childNodes=[sel.anchorNode];
 
-	    while(!(sib == sel.focusNode))
+		while(!(sib == sel.focusNode))
 	    {
 		if(sib.nextSibling!=null)
 		{
@@ -126,7 +161,7 @@ function addEvents(){
 	    
 	    
 	    //Add the selection to Notes
-	    var newNote=new NotesObject(notesId,selText,childRanges);
+	    var newNote=new NotesObject(notesId,selText,childRanges,boundingRect.top,boundingRect.left);
 	    Notes.push(newNote);
 	    
 	    //unselect the selection so that it does not cause back to back selection 
@@ -187,17 +222,17 @@ var ColorRanges=function(){
 		    close: function(event, ui)
 		    {
 			//hover tip to stay active
-			ui.tooltip.hover(function()
-					 {
-					     $(this).stop(true).fadeTo(400, 1); 
-					 },
-					 function()
-					 {
-					     $(this).fadeOut('400', function()
-							     {
-								 $(this).remove();
-							     });
-					 });
+			// ui.tooltip.hover(function()
+			// 		 {
+			// 		     $(this).stop(true).fadeTo(400, 1); 
+			// 		 },
+			// 		 function()
+			// 		 {
+			// 		     $(this).fadeOut('400', function()
+			// 				     {
+			// 					 $(this).remove();
+			// 				     });
+			// 		 });
 		    }
 		    
 		});
@@ -238,6 +273,7 @@ var DB={
 		    "Delete all": function() {
 			DB.deleteContainerContents();
 		    },
+		    //copies the current selected notes into your clipboard
 		    Copy: function(e) {
 			var selection=window.getSelection();
 			selection.removeAllRanges();
@@ -260,6 +296,7 @@ var DB={
     showContainer:function(){
 	var container=$(".notes-view");
 	$(container).html("");
+	Notes.sort(Notes.sortItems);
 	$.each(Notes,(index,note)=>{
 	    $(container).append("<div class='row notes-item notes-view-item-id-"+note.id+"'><div class='col-xs-12'><a onclick='DB.deleteItem("+note.id+")' href='#' class='glyphicon glyphicon-remove notes-remove' ></a><div class='notes-text' onclick='editTextContent()'>"+note.text+"</div></div></div>");
 	})
